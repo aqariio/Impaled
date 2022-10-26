@@ -46,7 +46,7 @@ public class HellforkItem extends ImpaledTridentItem {
                 user.damage(HellforkHeatDamageSource.HELLFORK_HEAT, 2f);
                 user.playSound(SoundEvents.ENTITY_PLAYER_HURT, 1.0f, 1.0f);
             } else {
-                player.addExperienceLevels(-1);
+                player.addExperience(-25);
             }
             if (world instanceof ServerWorld serverWorld) {
                 serverWorld.spawnParticles(ParticleTypes.SOUL, user.getX(), user.getY(), user.getZ(), 20, user.getRandom().nextFloat(), user.getRandom().nextGaussian(), user.getRandom().nextFloat(), user.getRandom().nextFloat() / 10f);
