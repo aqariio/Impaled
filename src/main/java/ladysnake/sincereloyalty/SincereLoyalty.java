@@ -38,18 +38,13 @@ import net.minecraft.util.registry.Registry;
 import java.util.UUID;
 
 public final class SincereLoyalty implements ModInitializer {
+    public static final String ID = Impaled.MODID;
 
-    public static final String MOD_ID = Impaled.MODID;
+    public static final TagKey<Item> LOYALTY_CATALYSTS = TagKey.of(Registry.ITEM_KEY, new Identifier(ID, "loyalty_catalysts"));
+    public static final TagKey<Item> TRIDENTS = TagKey.of(Registry.ITEM_KEY, new Identifier(ID, "tridents"));
 
-    public static final TagKey<Item> LOYALTY_CATALYSTS = TagKey.of(Registry.ITEM_KEY, id("loyalty_catalysts"));
-    public static final TagKey<Item> TRIDENTS = TagKey.of(Registry.ITEM_KEY, id("tridents"));
-
-    public static final Identifier RECALL_TRIDENTS_MESSAGE_ID = id("recall_tridents");
-    public static final Identifier RECALLING_MESSAGE_ID = id("recalling_tridents");
-
-    public static Identifier id(String path) {
-        return new Identifier(MOD_ID, path);
-    }
+    public static final Identifier RECALL_TRIDENTS_MESSAGE_ID = new Identifier(ID, "recall_tridents");
+    public static final Identifier RECALLING_MESSAGE_ID = new Identifier(ID, "recalling_tridents");
 
     @Override
     public void onInitialize() {

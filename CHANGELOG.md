@@ -1,5 +1,9 @@
 # Impaled - Changelog:
 
+### Impaled 1.1.5 - 1.19.2
+- Unbalanced the Soulfork
+- Backport changes from Impaled 1.2.0
+
 ### Impaled 1.1.4 - 1.19
 - Updated to Minecraft 1.19
 

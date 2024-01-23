@@ -30,7 +30,7 @@ import net.minecraft.util.math.ChunkPos;
 import java.util.UUID;
 
 public final class WorldTridentEntry extends TridentEntry {
-    public static final ChunkTicketType<UUID> TRIDENT_RECALL_TICKET = ChunkTicketType.create(SincereLoyalty.MOD_ID + ":trident_recall", UUID::compareTo, 10);
+    public static final ChunkTicketType<UUID> TRIDENT_RECALL_TICKET = ChunkTicketType.create(SincereLoyalty.ID + ":trident_recall", UUID::compareTo, 10);
 
     private UUID tridentEntityUuid;
     private BlockPos lastPos;

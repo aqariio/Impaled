@@ -17,10 +17,43 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
+	maven {
+		url "https://maven.ladysnake.org/releases"
+		content {
+			includeGroup("org.ladysnake")
+			includeGroupByRegex("dev\\.onyxstudios\\..*")
+		}
+	}
+	maven {
+		url "https://maven.ladysnake.org/snapshots"
+		content {
+			includeGroup("org.ladysnake")
+			includeGroup("xyz.amymialee")
+		}
+	}
 	// MixinExtras
-	maven { url "https://jitpack.io" }
+	maven {
+		url "https://jitpack.io"
+		content {
+			includeGroupByRegex "com\\.github\\..*"
+		}
+	}
+	maven {
+		name "modrinth"
+		url "https://api.modrinth.com/maven"
+		content {
+			includeGroup('maven.modrinth')
+		}
+	}
+	// modmenu
+	maven {
+		name = 'TerraformersMC'
+		url = 'https://maven.terraformersmc.com/'
+	}
 	// MialeeMisc
 	maven { url "https://maven.willbl.dev/releases" }
+	// bookshelf
+	maven { url 'https://maven.blamejared.com' }
 }
 
 dependencies {
@@ -32,8 +65,28 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	modImplementation include ("xyz.amymialee:mialeemisc:${project.mialeemisc_version}") {
+	modImplementation(libs.mialeemisc) {
 		exclude group: "dev.emi"
+	}
+	include (libs.mialeemisc)
+
+	modRuntimeOnly(libs.modmenu) {
+		exclude group: "net.fabricmc"
+	}
+//	modRuntimeOnly("com.github.Virtuoel:Pehkui:3.7.12") {
+//		exclude group: "net.fabricmc.fabric-api"
+//	}
+//	modRuntimeOnly("net.darkhax.bookshelf:Bookshelf-Fabric-1.19.2:16.3.20") {
+//		exclude group: "net.fabricmc"
+//	}
+//	modRuntimeOnly("maven.modrinth:enchantment-descriptions:13.0.14") {
+//		exclude group: "net.fabricmc"
+//	}
+	modCompileOnly(libs.enchancement)
+	modCompileOnly(libs.cca.base)
+	modCompileOnly(libs.midnightLib)
+	modRuntimeOnly(libs.bundles.enchancement) {
+		exclude group: "net.fabricmc.fabric-api"
 	}
 }
 

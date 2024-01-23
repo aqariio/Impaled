@@ -19,7 +19,10 @@ package ladysnake.sincereloyalty;
 
 import ladysnake.impaled.common.init.ImpaledItems;
 import ladysnake.impaled.common.item.ImpaledTridentItem;
+import ladysnake.impaled.compat.EnchancementCompat;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
@@ -28,11 +31,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
 public interface LoyalTrident {
-    String MOD_NBT_KEY = SincereLoyalty.MOD_ID;
+    String MOD_NBT_KEY = SincereLoyalty.ID;
     String TRIDENT_UUID_NBT_KEY = "trident_uuid";
     String OWNER_NAME_NBT_KEY = "owner_name";
     String TRIDENT_OWNER_NBT_KEY = "trident_owner";
@@ -59,8 +63,16 @@ public interface LoyalTrident {
         tridentStack.getOrCreateSubNbt(LoyalTrident.MOD_NBT_KEY).putInt(LoyalTrident.RETURN_SLOT_NBT_KEY, slot);
     }
 
+    static boolean isLoyalEnough(ItemStack stack) {
+        return isLoyalEnough(EnchantmentHelper.get(stack));
+    }
+
+    private static boolean isLoyalEnough(Map<Enchantment, Integer> enchantments) {
+        return enchantments.getOrDefault(Enchantments.LOYALTY, 0) >= Enchantments.LOYALTY.getMaxLevel() || EnchancementCompat.areTridentsLoyal();
+    }
+
     static boolean hasTrueOwner(ItemStack tridentStack) {
-        if (tridentStack.isIn(SincereLoyalty.TRIDENTS) && EnchantmentHelper.getLoyalty(tridentStack) > 0) {
+        if (tridentStack.isIn(SincereLoyalty.TRIDENTS) && isLoyalEnough(tridentStack)) {
             NbtCompound loyaltyNbt = tridentStack.getSubNbt(MOD_NBT_KEY);
             return loyaltyNbt != null && loyaltyNbt.containsUuid(TRIDENT_OWNER_NBT_KEY);
         }

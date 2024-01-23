@@ -54,7 +54,7 @@ public final class LoyalTridentStorage extends PersistentState {
     }
 
     public static LoyalTridentStorage get(ServerWorld world) {
-        final String id = SincereLoyalty.MOD_ID + "_trident_storage";
+        final String id = SincereLoyalty.ID + "_trident_storage";
         return world.getPersistentStateManager().getOrCreate(tag -> fromNbt(world, tag), () -> new LoyalTridentStorage(world), id);
     }
 
