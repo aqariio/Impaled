@@ -22,6 +22,7 @@ import moriyashiine.enchancement.client.util.EnchancementClientUtil;
 import moriyashiine.enchancement.common.ModConfig;
 import moriyashiine.enchancement.common.component.entity.LeechComponent;
 import moriyashiine.enchancement.common.component.entity.WarpComponent;
+import moriyashiine.enchancement.common.util.EnchancementUtil;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -57,7 +58,7 @@ public final class EnchancementCompat {
 
     public static boolean areTridentsLoyal() {
         if (ENABLED) {
-            return ModConfig.allTridentsHaveLoyalty && !ModConfig.isEnchantmentAllowed(Objects.requireNonNull(Registry.ENCHANTMENT.getId(Enchantments.LOYALTY)));
+            return ModConfig.allTridentsHaveLoyalty && !EnchancementUtil.isEnchantmentAllowed(Objects.requireNonNull(Registry.ENCHANTMENT.getId(Enchantments.LOYALTY)));
         }
         return false;
     }
